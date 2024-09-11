@@ -25,10 +25,17 @@ class NameViewModel @Inject constructor(
 
     private fun getNameInfo(){
         viewModelScope.launch {
-            val nameInfo = nameRepository.getNameData()
-            _nameInfoState.update {
-                it.copy(string = nameInfo)
+            try {
+                val nameInfo = nameRepository.getNameData()
+                _nameInfoState.update {
+                    it.copy(nameInfo)
+                }
+            }catch (_:Exception){
+                _nameInfoState.update {
+                    it.copy("Error")
+                }
             }
+
         }
     }
 
