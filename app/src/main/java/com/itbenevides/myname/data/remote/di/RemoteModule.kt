@@ -17,7 +17,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteModule {
-
     @Provides
     @Singleton
     fun provideHttpClient(): HttpClient{

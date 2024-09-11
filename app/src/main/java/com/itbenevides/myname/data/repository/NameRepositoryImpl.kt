@@ -9,7 +9,6 @@ class NameRepositoryImpl @Inject constructor(
     override suspend fun getNameData(): String {
        val response = remoteNameDataSource.getNameDataResponse()
         val name = response.name
-
         return name
     }
 }

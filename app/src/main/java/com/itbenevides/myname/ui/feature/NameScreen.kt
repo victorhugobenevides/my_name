@@ -15,10 +15,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.itbenevides.myname.ui.theme.NameTheme
 
-
-@Composable
+    @Composable
     fun NameRoute(
-    viewModel: NameViewModel = viewModel(),
+        viewModel: NameViewModel = viewModel(),
     ) {
         val nameInfoState by viewModel.nameInfoState.collectAsStateWithLifecycle()
         NameScreen(name = nameInfoState.string)
