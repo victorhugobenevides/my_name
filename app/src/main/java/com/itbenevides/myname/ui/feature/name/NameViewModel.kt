@@ -1,4 +1,4 @@
-package com.itbenevides.myname.ui.feature
+package com.itbenevides.myname.ui.feature.name
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

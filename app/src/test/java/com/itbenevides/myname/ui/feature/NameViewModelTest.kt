@@ -2,6 +2,7 @@ package com.itbenevides.myname.ui.feature
 
 import com.itbenevides.myname.data.repository.NameRepository
 import com.itbenevides.myname.settings.Dispatchers
+import com.itbenevides.myname.ui.feature.name.NameViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
