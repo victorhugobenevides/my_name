@@ -3,13 +3,12 @@ version: 2.1
 orbs:
   android: circleci/android@1.0.3
 jobs:
-  unit-test:
+  android-test:
     executor:
-      name: android/android-docker
-      tag: 2022.08.1
+      name: android/android-machine
+      resource-class: xlarge
     steps:
       - checkout
-      - android/restore-gradle-cache
-      - android/run-tests:
-          test-command: ./gradlew testDebug
-      - android/save-gradle-cache
+      - android/start-emulator-and-run-tests:
+          test-command: ./gradlew connectedDebugAndroidTest
+          system-image: system-images;android-30;google_apis;x86
