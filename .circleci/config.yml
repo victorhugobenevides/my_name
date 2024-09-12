@@ -20,4 +20,4 @@ jobs:
       - run:
           chmod +x gradlew
       - run:
-          command: ./gradlew assembleDebugAndroidTest
+          command: ./gradlew build --stacktrace
