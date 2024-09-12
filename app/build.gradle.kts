@@ -33,8 +33,6 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -46,6 +44,14 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    kapt {
+        useBuildCache = true
+    }
+
+    dexOptions {
+        preDexLibraries = true
+        jumboMode = false
     }
     packaging {
         resources {
