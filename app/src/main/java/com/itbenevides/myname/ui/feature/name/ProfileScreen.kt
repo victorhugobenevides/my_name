@@ -13,25 +13,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.itbenevides.myname.ui.theme.NameTheme
+import com.itbenevides.myname.data.model.Profile
+import com.itbenevides.myname.ui.theme.ProfileTheme
 
-    @Composable
-    fun NameRoute(
-        viewModel: NameViewModel = viewModel(),
+@Composable
+    fun ProfileRoute(
+        viewModel: ProfileViewModel = viewModel(),
     ) {
-        val nameInfoState by viewModel.nameInfoState.collectAsStateWithLifecycle()
-        NameScreen(name = nameInfoState.string)
+        val nameInfoState by viewModel.profileInfoState.collectAsStateWithLifecycle()
+        ProfileScreen(profile = nameInfoState.profile)
     }
 
     @Composable
-    fun NameScreen(name: String){
+    fun ProfileScreen(profile: Profile){
         Surface {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxHeight()
             ){
                 Text(
-                    text = name,
+                    text = profile.name,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -41,9 +42,9 @@ import com.itbenevides.myname.ui.theme.NameTheme
 
     @Preview(showSystemUi = true, showBackground = false)
     @Composable
-    fun NameScreenPreview(){
-        NameTheme{
-            NameScreen("Teste da silva")
+    fun ProfileScreenPreview(){
+        ProfileTheme{
+            ProfileScreen(Profile(name = "Teste da silva"))
         }
     }
 
