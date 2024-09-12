@@ -30,9 +30,9 @@ class NameViewModel @Inject constructor(
                 _nameInfoState.update {
                     it.copy(nameInfo)
                 }
-            }catch (_:Exception){
+            }catch (e:Exception){
                 _nameInfoState.update {
-                    it.copy("Error")
+                    it.copy("Error: $e")
                 }
             }
 
