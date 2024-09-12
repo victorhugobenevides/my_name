@@ -1,11 +1,11 @@
 version: 2.1
 
 orbs:
-  android: cimg/android:2024.09
+  android: circleci/android@0.2.0
 
 jobs:
   build:
-    executor: android/android
+    executor: cimg/android:2024.09
 
     steps:
       - checkout
