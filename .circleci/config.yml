@@ -27,4 +27,5 @@ jobs:
           name: Run unit test
           command: ./gradlew testReleaseUnitTest
       - store_test_results:
-          path: app/build/reports/tests/testReleaseUnitTest
+          path: app/build/test-results
+
