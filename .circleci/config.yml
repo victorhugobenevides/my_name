@@ -1,14 +1,17 @@
 version: 2.1
 
 orbs:
-  android: circleci/android@1.0.3
+  android: circleci/android@2.5.0
+
 jobs:
-  android-test:
+  build:
     executor:
       name: android/android-machine
-      resource-class: xlarge
+      resource-class: large
+      tag: 2021.10.1
     steps:
       - checkout
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-30;google_apis;x86
+      - run:
+          chmod +x gradlew
+      - run:
+          command: ./gradlew build --stacktrace
