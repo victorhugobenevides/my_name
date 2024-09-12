@@ -14,7 +14,7 @@ class NameViewModelTest: Dispatchers() {
     fun Get_Name_Success(){
         viewModel = NameViewModel(MockRepository())
         val name = viewModel.nameInfoState.value.string
-        assertEquals("Pipoca doce", name)
+        assertEquals("Pipoca docee", name)
     }
 }
 
