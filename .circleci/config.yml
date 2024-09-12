@@ -5,17 +5,11 @@ orbs:
 
 jobs:
   build:
+    docker:
+      - image: cimg/android:2024.09
     executor: android/android
-
     steps:
       - checkout
-      - run:
-            name: Install OpenJDK 17
-            command: |
-              sudo apt-get update && sudo apt-get install openjdk-17-jdk
-              sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
-              sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
-              java -version
       - run:
           chmod +x gradlew
       - run:
