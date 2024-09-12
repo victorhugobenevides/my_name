@@ -12,4 +12,6 @@ jobs:
       - run:
           chmod +x gradlew
       - run:
+            ls
+      - run:
           command: ./gradlew build
