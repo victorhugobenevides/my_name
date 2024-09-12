@@ -1,4 +1,4 @@
-package com.itbenevides.myname.ui.feature.name
+package com.itbenevides.myname.ui.feature.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

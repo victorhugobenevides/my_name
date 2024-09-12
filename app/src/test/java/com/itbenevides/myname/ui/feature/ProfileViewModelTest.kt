@@ -3,7 +3,7 @@ package com.itbenevides.myname.ui.feature
 import com.itbenevides.myname.data.model.Profile
 import com.itbenevides.myname.data.repository.ProfileRepository
 import com.itbenevides.myname.settings.Dispatchers
-import com.itbenevides.myname.ui.feature.name.ProfileViewModel
+import com.itbenevides.myname.ui.feature.profile.ProfileViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
