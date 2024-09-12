@@ -11,10 +11,10 @@ class NameViewModelTest: Dispatchers() {
 
     private lateinit var viewModel: NameViewModel
     @Test
-    fun Get_Name_Success(){
+    fun get_name_success(){
         viewModel = NameViewModel(MockRepository())
         val name = viewModel.nameInfoState.value.string
-        assertEquals("Pipoca docee", name)
+        assertEquals("Pipoca doce", name)
     }
 }
 

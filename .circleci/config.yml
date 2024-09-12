@@ -22,3 +22,5 @@ jobs:
           chmod +x gradlew
       - run:
           command: ./gradlew testReleaseUnitTest
+      - store_test_results:
+          path: test-results
