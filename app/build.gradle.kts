@@ -45,14 +45,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    kapt {
-        useBuildCache = true
-    }
-
-    dexOptions {
-        preDexLibraries = true
-        jumboMode = false
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
