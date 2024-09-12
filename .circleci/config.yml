@@ -2,22 +2,14 @@ version: 2.1
 
 orbs:
   android: circleci/android@1.0.3
-
 jobs:
-  build:
-    docker:
-      - image: cimg/android:2024.09
-    executor: android/android
+  unit-test:
+    executor:
+      name: android/android-docker
+      tag: 2022.08.1
     steps:
       - checkout
-      - run:
-            name: Install OpenJDK 17
-            command: |
-              sudo apt-get update && sudo apt-get install openjdk-17-jdk
-              sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
-              sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
-              java -version
-      - run:
-          chmod +x gradlew
-      - run:
-          command: ./gradlew build --stacktrace
+      - android/restore-gradle-cache
+      - android/run-tests:
+          test-command: ./gradlew testDebug
+      - android/save-gradle-cache
