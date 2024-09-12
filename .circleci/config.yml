@@ -5,13 +5,18 @@ orbs:
 
 jobs:
   build:
-    executor: cimg/android:2024.09
+    executor: android/android
 
     steps:
       - checkout
       - run:
-          chmod +x gradlew
+            name: Install OpenJDK 17
+            command: |
+              sudo apt-get update && sudo apt-get install openjdk-17-jdk
+              sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+              sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+              java -version
       - run:
-            ls
+          chmod +x gradlew
       - run:
           command: ./gradlew build
