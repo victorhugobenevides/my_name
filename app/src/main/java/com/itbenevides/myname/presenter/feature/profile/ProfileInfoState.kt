@@ -1,4 +1,4 @@
-package com.itbenevides.myname.ui.feature.profile
+package com.itbenevides.myname.presenter.feature.profile
 
 import com.itbenevides.myname.data.model.Profile
 

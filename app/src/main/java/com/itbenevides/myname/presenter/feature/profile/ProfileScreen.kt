@@ -1,4 +1,4 @@
-package com.itbenevides.myname.ui.feature.profile
+package com.itbenevides.myname.presenter.feature.profile
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.itbenevides.myname.data.model.Profile
-import com.itbenevides.myname.ui.theme.ProfileTheme
+import com.itbenevides.myname.presenter.theme.ProfileTheme
 
 @Composable
     fun ProfileRoute(

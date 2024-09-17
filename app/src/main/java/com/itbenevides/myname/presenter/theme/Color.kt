@@ -1,4 +1,4 @@
-package com.itbenevides.myname.ui.theme
+package com.itbenevides.myname.presenter.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,7 +1,7 @@
-package com.itbenevides.myname.data.repository
+package com.itbenevides.myname.domain.di
 
 import com.itbenevides.myname.data.model.Profile
 
-interface ProfileRepository {
+interface ProfileUseCase {
     suspend fun getProfileData(): Profile
 }

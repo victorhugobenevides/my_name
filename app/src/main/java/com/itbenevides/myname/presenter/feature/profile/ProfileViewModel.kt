@@ -1,9 +1,9 @@
-package com.itbenevides.myname.ui.feature.profile
+package com.itbenevides.myname.presenter.feature.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.itbenevides.myname.data.model.Profile
-import com.itbenevides.myname.data.repository.ProfileRepository
+import com.itbenevides.myname.domain.di.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository
+    private val profileUseCase: ProfileUseCase
 ) : ViewModel() {
 
     private val _profileInfoState = MutableStateFlow(ProfileInfoState(Profile("")))
@@ -27,7 +27,7 @@ class ProfileViewModel @Inject constructor(
     private fun getProfileInfo(){
         viewModelScope.launch {
             try {
-                val profileInfo = profileRepository.getProfileData()
+                val profileInfo = profileUseCase.getProfileData()
                 _profileInfoState.update {
                     it.copy(profile = profileInfo)
                 }

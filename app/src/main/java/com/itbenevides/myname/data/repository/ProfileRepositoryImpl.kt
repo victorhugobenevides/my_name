@@ -2,6 +2,7 @@ package com.itbenevides.myname.data.repository
 
 import com.itbenevides.myname.data.model.Profile
 import com.itbenevides.myname.data.remote.RemoteDataSource
+import com.itbenevides.myname.domain.di.ProfileRepository
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
