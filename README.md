@@ -1,4 +1,6 @@
-Estudos sobre MVVM - 
+Estudos  
+
+
 
   Ktor https://ktor.io/docs/client-create-multiplatform-application.html
 	
@@ -13,6 +15,10 @@ Design patterns
 	Singleton
  	Interface
   	Dependency Injection
+   	MVVM
+    	Clean architecture
+     	S.O.L.I.D
+   
 
 Test
 	Unity test - Junit
