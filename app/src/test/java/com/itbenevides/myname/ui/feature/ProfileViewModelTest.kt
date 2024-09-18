@@ -2,25 +2,47 @@ package com.itbenevides.myname.ui.feature
 
 import com.itbenevides.myname.data.model.Profile
 import com.itbenevides.myname.data.repository.ProfileRepository
-import com.itbenevides.myname.settings.Dispatchers
 import com.itbenevides.myname.ui.feature.profile.ProfileViewModel
+import io.mockk.coEvery
+import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
+class ProfileViewModelTest {
 
-class ProfileViewModelTest: Dispatchers() {
-
+    private lateinit var repository: ProfileRepository
     private lateinit var viewModel: ProfileViewModel
-    @Test
-    fun get_profile_success(){
-        viewModel = ProfileViewModel(MockProfileRepository())
-        val profile = viewModel.profileInfoState.value.profile
-        assertEquals(Profile(name = "Pipoca doce"), profile)
-    }
-}
 
-class MockProfileRepository : ProfileRepository {
-    override suspend fun getProfileData(): Profile {
-        return Profile(name = "Pipoca doce")
+
+
+    @Before
+    fun setup(){
+        Dispatchers.setMain(Dispatchers.Unconfined)
+        repository = mockk<ProfileRepository>()
+    }
+
+    @Test
+    fun `test get profile data`() = runTest{
+        val profile = mockk<Profile>()
+
+        coEvery { repository.getProfileData() } returns profile
+        viewModel = ProfileViewModel(repository)
+
+        val result = viewModel.profileInfoState.value.profile
+        assertEquals(profile, result)
+
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 }

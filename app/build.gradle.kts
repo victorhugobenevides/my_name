@@ -90,6 +90,7 @@ dependencies {
     testImplementation (libs.mockito.core)
     testImplementation (libs.core.testing)
     testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 
 }
 

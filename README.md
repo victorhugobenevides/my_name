@@ -10,6 +10,8 @@ Estudos
 
   Coroutines https://kotlinlang.org/docs/coroutines-overview.html
 
+  Mockk https://mockk.io/
+
 #DesignPatterns
 
 #MVVM
