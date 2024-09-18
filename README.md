@@ -10,14 +10,13 @@ Estudos
 
   Coroutines https://kotlinlang.org/docs/coroutines-overview.html
 
-Design patterns
+#DesignPatterns
 
-	Singleton
- 	Interface
-  	Dependency Injection
-   	MVVM
-    	Clean architecture
-     	S.O.L.I.D
+#MVVM
+
+#Clean architecture
+
+#S.O.L.I.D
    
 
 Test
