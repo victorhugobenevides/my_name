@@ -14,8 +14,6 @@ Estudos
 
 #MVVM
 
-#Clean architecture
-
 #S.O.L.I.D
    
 
