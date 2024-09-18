@@ -31,7 +31,7 @@ class ProfileViewModelTest {
 
     @Test
     fun `test get profile data`() = runTest{
-        val profile = mockk<Profile>()
+        val profile = Profile(name = "Victor")
 
         coEvery { repository.getProfileData() } returns profile
         viewModel = ProfileViewModel(repository)
