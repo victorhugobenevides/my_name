@@ -33,7 +33,7 @@ class ProfileViewModelTest {
     fun `when get profile data`() = runTest{
         coEvery { repository.getProfileData() } returns profile
         viewModel = ProfileViewModel(repository)
-        val profileResult = viewModel.profileInfoState.value.profile
+        val profileResult = viewModel.profileInfoState.value.data as Profile
         assertEquals(profile, profileResult)
 
     }

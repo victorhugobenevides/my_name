@@ -19,8 +19,8 @@ class ProfileViewModel @Inject constructor(
 
     private val _profileInfoState = MutableStateFlow(
         ProfileInfoState(
-            profile =  Profile("", 0),
-            result = StatusResult.Success
+            data =  Profile(name = "", yearOfBirth = 0),
+            status = StatusResult.Success
         )
     )
     val profileInfoState: StateFlow<ProfileInfoState> =
@@ -37,11 +37,11 @@ class ProfileViewModel @Inject constructor(
                 val profileInfo =
                     profileRepository.getProfileData()
                 _profileInfoState.update {
-                    it.copy(profile = profileInfo,result = StatusResult.Success)
+                    it.copy(data = profileInfo, status = StatusResult.Success)
                 }
-            }catch (_:Exception){
+            }catch (exception :Exception){
                 _profileInfoState.update {
-                    it.copy(result = StatusResult.Error)
+                    it.copy(data = exception.message, status = StatusResult.Error)
                 }
 
             }
@@ -50,7 +50,7 @@ class ProfileViewModel @Inject constructor(
 
     private fun loading(){
         _profileInfoState.update {
-            it.copy(result = StatusResult.Loading)
+            it.copy(status = StatusResult.Loading)
         }
     }
 }

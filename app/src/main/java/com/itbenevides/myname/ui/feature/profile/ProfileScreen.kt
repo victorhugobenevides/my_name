@@ -39,15 +39,17 @@ import com.itbenevides.myname.ui.theme.ProfileTheme
     ) {
         val state by viewModel.profileInfoState.collectAsStateWithLifecycle()
 
-        when(state.result){
+        when(state.status){
             StatusResult.Error -> {
-                TODO("Estudar tratamento de erro")
+                val message = state.data as String
+                ErrorScreen(message)
             }
             StatusResult.Loading -> {
                 LoadingScreen()
             }
             StatusResult.Success -> {
-                ProfileScreen(profile = state.profile)
+                val profile = state.data as Profile
+                ProfileScreen(profile = profile)
             }
         }
     }
@@ -68,7 +70,7 @@ import com.itbenevides.myname.ui.theme.ProfileTheme
                     Image(
                         painter = painterResource(R.drawable.ic_launcher_background),
                         alignment = Alignment.Center,
-                        contentDescription = "avatar",
+                        contentDescription = "Foto",
                         contentScale = ContentScale.FillWidth,
                         modifier = Modifier
                             .size(120.dp)
@@ -97,26 +99,39 @@ import com.itbenevides.myname.ui.theme.ProfileTheme
 
 @Composable
 fun LoadingScreen() {
-
     Surface {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.width(64.dp),
-                    color = MaterialTheme.colorScheme.secondary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                )
-            }
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier.width(64.dp),
+                color = MaterialTheme.colorScheme.secondary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
         }
+    }
+}
 
-
-
+@Composable
+fun ErrorScreen(message: String) {
+    Surface {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = message,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                fontSize = 22.sp,
+            )
+        }
+    }
 }
 
     @Preview(showSystemUi = true, showBackground = false)

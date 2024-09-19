@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Meteorologia</string>
+    <string name="error_msg">Deu ruim!!!!!!!!!!</string>
 </resources>

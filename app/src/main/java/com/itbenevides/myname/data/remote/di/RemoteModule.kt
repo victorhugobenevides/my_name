@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
@@ -19,18 +20,26 @@ import javax.inject.Singleton
 object RemoteModule {
     @Provides
     @Singleton
-    fun provideHttpClient(): HttpClient{
-        return HttpClient(Android){
-            install(Logging){
+    fun provideHttpClient(): HttpClient {
+        return HttpClient(Android) {
+            install(Logging) {
                 logger = Logger.SIMPLE
             }
-            install(ContentNegotiation){
+            install(ContentNegotiation) {
                 json(
-                    Json{
+                    Json {
                         prettyPrint = true
                         isLenient = true
                     }
                 )
+            }
+            HttpResponseValidator {
+                validateResponse { response ->
+                    val error: Int = response.status.value
+                    if (error != 0) {
+                        throw Exception(response.status.value.toString())
+                    }
+                }
             }
         }
     }
