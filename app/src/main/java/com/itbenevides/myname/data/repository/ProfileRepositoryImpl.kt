@@ -10,6 +10,7 @@ class ProfileRepositoryImpl @Inject constructor(
     override suspend fun getProfileData(): Profile {
        val response = remoteProfileDataSource.getProfileDataResponse()
         val name = response.name
-        return Profile(name = name)
+        val yearOfBirth = response.yearOfBirth
+        return Profile(name = name, yearOfBirth = yearOfBirth)
     }
 }

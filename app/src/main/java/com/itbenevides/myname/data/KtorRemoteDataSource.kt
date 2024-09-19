@@ -16,7 +16,7 @@ class KtorRemoteDataSource @Inject constructor(
 
     override suspend fun getProfileDataResponse(): ProfileDataResponse {
         return httpClient
-            .get("${BASE_URL}/name")
+            .get("${BASE_URL}/profile")
             .body()
     }
 }

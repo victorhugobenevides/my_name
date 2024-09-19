@@ -1,3 +1,3 @@
 package com.itbenevides.myname.data.model
 
-data class Profile(val name: String)
+data class Profile(val name: String, val yearOfBirth: Int)

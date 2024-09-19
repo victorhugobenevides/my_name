@@ -17,25 +17,40 @@ class ProfileViewModel @Inject constructor(
     private val profileRepository: ProfileRepository
 ) : ViewModel() {
 
-    private val _profileInfoState = MutableStateFlow(ProfileInfoState(Profile("")))
-    val profileInfoState: StateFlow<ProfileInfoState> = _profileInfoState.asStateFlow()
+    private val _profileInfoState = MutableStateFlow(
+        ProfileInfoState(
+            profile =  Profile("", 0),
+            result = StatusResult.Success
+        )
+    )
+    val profileInfoState: StateFlow<ProfileInfoState> =
+        _profileInfoState.asStateFlow()
 
     init {
+        loading()
         getProfileInfo()
     }
 
     private fun getProfileInfo(){
         viewModelScope.launch {
             try {
-                val profileInfo = profileRepository.getProfileData()
+                val profileInfo =
+                    profileRepository.getProfileData()
                 _profileInfoState.update {
-                    it.copy(profile = profileInfo)
+                    it.copy(profile = profileInfo,result = StatusResult.Success)
                 }
             }catch (_:Exception){
+                _profileInfoState.update {
+                    it.copy(result = StatusResult.Error)
+                }
 
             }
-
         }
     }
 
+    private fun loading(){
+        _profileInfoState.update {
+            it.copy(result = StatusResult.Loading)
+        }
+    }
 }

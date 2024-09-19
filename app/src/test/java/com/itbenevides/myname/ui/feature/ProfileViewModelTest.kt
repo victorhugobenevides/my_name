@@ -20,7 +20,7 @@ class ProfileViewModelTest {
 
     private lateinit var repository: ProfileRepository
     private lateinit var viewModel: ProfileViewModel
-
+    private val profile = Profile(name = "Victor Hugo Benevides Sobrinho", yearOfBirth = 1989)
 
 
     @Before
@@ -30,14 +30,11 @@ class ProfileViewModelTest {
     }
 
     @Test
-    fun `test get profile data`() = runTest{
-        val profile = Profile(name = "Victor")
-
+    fun `when get profile data`() = runTest{
         coEvery { repository.getProfileData() } returns profile
         viewModel = ProfileViewModel(repository)
-
-        val result = viewModel.profileInfoState.value.profile
-        assertEquals(profile, result)
+        val profileResult = viewModel.profileInfoState.value.profile
+        assertEquals(profile, profileResult)
 
     }
 
