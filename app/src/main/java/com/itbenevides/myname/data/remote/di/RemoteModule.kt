@@ -35,8 +35,8 @@ object RemoteModule {
             }
             HttpResponseValidator {
                 validateResponse { response ->
-                    val error: Int = response.status.value
-                    if (error != 0) {
+                    val statusCode: Int = response.status.value
+                    if (statusCode != 200) {
                         throw Exception(response.status.value.toString())
                     }
                 }
