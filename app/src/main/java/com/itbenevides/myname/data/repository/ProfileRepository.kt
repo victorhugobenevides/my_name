@@ -6,5 +6,5 @@ import rx.Observable
 
 
 interface ProfileRepository {
-     suspend fun getProfileData(): Observable<Profile>
+     suspend fun getProfileData(): Profile
 }
