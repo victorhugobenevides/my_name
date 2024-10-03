@@ -31,7 +31,7 @@ class ProfileViewModel @Inject constructor(
         getProfileInfo()
     }
 
-    private fun getProfileInfo(){
+    fun getProfileInfo(){
         viewModelScope.launch {
             try {
                 val profile = profileRepository
@@ -47,7 +47,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun loading(){
+    fun loading(){
         _profileInfoState.update {
             it.copy(status = StatusResult.Loading)
         }
