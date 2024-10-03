@@ -14,12 +14,6 @@ class ProfileRepositoryImpl @Inject constructor(
        val response =
            apiService
                .getProfileDataResponse()
-               .map{
-                       Profile(
-                           name = it.name,
-                           yearOfBirth = it.yearOfBirth
-                       )
-               }
                .subscribeOn(Schedulers.io())
                .toBlocking()
                .single()
