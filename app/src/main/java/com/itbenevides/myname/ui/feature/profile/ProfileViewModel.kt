@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,18 +35,23 @@ class ProfileViewModel @Inject constructor(
 
     private fun getProfileInfo(){
         viewModelScope.launch {
-            try {
-                val profileInfo =
-                    profileRepository.getProfileData()
-                _profileInfoState.update {
-                    it.copy(data = profileInfo, status = StatusResult.Success)
-                }
-            }catch (exception :Exception){
-                _profileInfoState.update {
-                    it.copy(data = exception.message, status = StatusResult.Error)
-                }
-
-            }
+                profileRepository
+                    .getProfileData()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            profile ->
+                            _profileInfoState.update {
+                                it.copy(data = profile, status = StatusResult.Success)
+                            }
+                        },
+                        {
+                            exception ->
+                            _profileInfoState.update {
+                                it.copy(data = exception.message, status = StatusResult.Error)
+                            }
+                        })
         }
     }
 
