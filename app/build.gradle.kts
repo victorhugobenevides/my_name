@@ -90,10 +90,12 @@ dependencies {
     testImplementation (libs.mockito.core)
     testImplementation (libs.core.testing)
     testImplementation(libs.mockk)
+    testImplementation (libs.kotlinx.coroutines.test)
 
     /* rx */
     implementation ("io.reactivex:rxandroid:1.2.1")
     implementation ("io.reactivex:rxjava:1.3.2")
+
 
     /* retrofit, gson */
     implementation ("com.squareup.retrofit2:retrofit:2.4.0")
@@ -101,7 +103,6 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.4.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:3.8.1")
     implementation ("com.squareup.retrofit2:converter-scalars:2.4.0")
-
 }
 
 kapt {

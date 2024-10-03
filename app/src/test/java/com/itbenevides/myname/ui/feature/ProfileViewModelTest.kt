@@ -1,33 +1,81 @@
-package com.itbenevides.myname.ui.feature
-
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.itbenevides.myname.data.model.Profile
 import com.itbenevides.myname.data.repository.ProfileRepository
 import com.itbenevides.myname.ui.feature.profile.ProfileViewModel
+import com.itbenevides.myname.ui.feature.profile.StatusResult
+import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
-
+@OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModelTest {
 
-    private lateinit var repository: ProfileRepository
-    private lateinit var viewModel: ProfileViewModel
-    private val profile = Profile(name = "Victor Hugo Benevides Sobrinho", yearOfBirth = 1989)
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    private lateinit var profileViewModel: ProfileViewModel
+
+    private val profileRepository: ProfileRepository = mockk()
+
+    private val testDispatcher = StandardTestDispatcher()
 
     @Before
-    fun setup(){
-        repository = mockk<ProfileRepository>()
+    fun setup() {
+        Dispatchers.setMain(testDispatcher)
+
+        coEvery { profileRepository.getProfileData() } returns Profile(name = "Test User", yearOfBirth = 1990)
+
+        profileViewModel = ProfileViewModel(profileRepository)
+    }
+
+    @After
+    fun tearDown() {
+        clearAllMocks()
+        Dispatchers.resetMain()
     }
 
     @Test
-    fun `when get profile data`() {
-        coEvery { repository.getProfileData() } returns profile
-        viewModel = ProfileViewModel(repository)
-        val profileResult = viewModel.profileInfoState.value.data as Profile
-        assertEquals(profile, profileResult)
+    fun `should update state to Loading initially`() = runTest {
+        val loadingState = profileViewModel.profileInfoState.take(1).first()
 
+        assertEquals(StatusResult.Loading, loadingState.status)
+
+        advanceUntilIdle()
+    }
+
+    @Test
+    fun `should update state to Success when profile is loaded successfully`() = runTest {
+        advanceUntilIdle()
+
+        val result = profileViewModel.profileInfoState.take(1).first()
+
+        assertEquals(StatusResult.Success, result.status)
+        assertEquals("Test User", (result.data as Profile).name)
+    }
+
+    @Test
+    fun `should update state to Error when profile loading fails`() = runTest {
+        coEvery { profileRepository.getProfileData() } throws RuntimeException("Network Error")
+
+        advanceUntilIdle()
+
+        val result = profileViewModel.profileInfoState.take(1).first()
+
+        assertEquals(StatusResult.Error, result.status)
+        assertEquals("Network Error", result.data)
     }
 }
