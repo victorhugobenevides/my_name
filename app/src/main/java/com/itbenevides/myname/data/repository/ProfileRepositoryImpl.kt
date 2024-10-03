@@ -3,6 +3,7 @@ package com.itbenevides.myname.data.repository
 
 import com.itbenevides.myname.data.model.Profile
 import com.itbenevides.myname.data.remote.APIService
+import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import javax.inject.Inject
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.itbenevides.myname.data.model.Profile
 import com.itbenevides.myname.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,8 +32,8 @@ class ProfileViewModel @Inject constructor(
         getProfileInfo()
     }
 
-    fun getProfileInfo(){
-        viewModelScope.launch {
+    private fun getProfileInfo(){
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val profile = profileRepository
                     .getProfileData()

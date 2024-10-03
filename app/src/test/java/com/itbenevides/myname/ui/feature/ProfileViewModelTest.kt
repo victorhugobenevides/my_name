@@ -77,6 +77,8 @@ class ProfileViewModelTest {
     fun `should update state to Error when profile loading fails`() = runTest {
         coEvery {  profileRepository.getProfileData() } throws RuntimeException("Network Error")
         profileViewModel = ProfileViewModel(profileRepository)
+
+        advanceUntilIdle()
         advanceUntilIdle()
 
         val result = profileViewModel.profileInfoState.take(1).first()
